@@ -1,13 +1,15 @@
 import gi
 import widgets
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, GdkPixbuf, GLib
 from get_apps_info import *
 from widget_events import *
+
 
 class Launcher(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self)
+        self.apps = {}
         self.setupUI()
         self.boxes()
         self.adding_elements()
@@ -25,19 +27,23 @@ class Launcher(Gtk.Window):
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.add(vbox)
 
-
         vbox.pack_start(widgets.search_entry, False, False, 0)
+        vbox.pack_start(widgets.scrolled_window, False, False, 0)
 
-        vbox.pack_start(widgets.listbox, True, True, 0)
+
 
     def adding_elements(self):
         items = get_app_info()
         for name, exec_cmd, icon in items:
-            label = Gtk.Label(label=name, xalign=0)
-            widgets.listbox.add(label)
+            item = create_submenu_item(name, icon, True)
+            item.exec_cmd = exec_cmd
 
-        widgets.listbox.set_filter_func(filter_func, None, widgets.search_entry)
-        widgets.listbox.show_all()
+
+            item.connect("button-press-event", lambda w, e, cmd=exec_cmd: launch_app(w, cmd))
+            widgets.listbox.add(item)
+        widgets.listbox.connect("key-press-event", on_key_press_)
+
+
 
 win = Launcher()
 win.connect("destroy", Gtk.main_quit)
