@@ -91,7 +91,6 @@ def on_key_press_(widget, event):
     if key == "Return":
         selected_row = widget.get_selected_row()
         if selected_row:
-            # exec_cmd = selected_row.exec_cmd  # retrieve command
             exec_cmd = selected_row.get_child().exec_cmd
             run_selected_program(selected_row, exec_cmd)
         return True
@@ -103,3 +102,12 @@ def launch_app(widget, exec):
     else:
         cmd = shlex.split(exec)
         subprocess.Popen(cmd, start_new_session = True, cwd = os.path.expanduser("~"))
+    exit(0)
+
+
+def on_key_press(widget, event):
+    key = Gdk.keyval_name(event.keyval)
+    if key == "Escape":
+        # exit(0)
+        Gtk.main_quit()
+    return True

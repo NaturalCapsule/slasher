@@ -1,0 +1,22 @@
+.Window {
+    background-color: transparent;
+}
+
+.Entry > image,
+.Entry > icon.primary {
+    color: black;
+}
+
+.Entry {
+    background-color: white;
+    color: black;
+}
+
+.Scroller {
+    color: white;
+    background-color: blue;
+}
+
+* {
+    transition: all 0.2s ease;
+}
