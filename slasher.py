@@ -26,7 +26,6 @@ class Slasher(Gtk.Window):
     def boxes(self):
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.add(vbox)
-
         vbox.pack_start(widgets.search_entry, False, False, 0)
         vbox.pack_start(widgets.scrolled_window, False, False, 0)
 

@@ -8,6 +8,17 @@
 }
 
 
+.App-Names {
+    color: white;
+}
+
+.App-Images {
+    /* background-color: aqua;
+    border-radius: 10px; */
+    /* padding-left: 10px;
+    padding-right: 10px; */
+}
+
 .Entry {
     background-color: white;
     color: black;

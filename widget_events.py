@@ -48,19 +48,17 @@ def create_submenu_item(label_text, icon_path=None, use_theme_icon=False):
                 pixbuf = Gtk.IconTheme.get_default().load_icon(icon_path, 32, 0)
                 scaled_pixbuf = pixbuf.scale_simple(20, 20, GdkPixbuf.InterpType.BILINEAR)
                 icon = Gtk.Image.new_from_pixbuf(scaled_pixbuf)
+                icon.get_style_context().add_class('App-Images')
+
             except GLib.Error:
                 icon = Gtk.Image.new_from_icon_name(icon_path, Gtk.IconSize.SMALL_TOOLBAR)
-        else:
-            try:
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(icon_path, 20, 20)
-                icon = Gtk.Image.new_from_pixbuf(pixbuf)
-            except GLib.Error:
-                icon = Gtk.Image.new_from_icon_name(icon_path, Gtk.IconSize.MENU)
+                icon.get_style_context().add_class('App-Images')
                 
         hbox.pack_start(icon, False, False, 2)
         
     label = Gtk.Label(label=label_text)
-    # label.get_style_context().add_class('Submenu-Button') # yeah this is a label but it acts like a button so its a button, shut up
+
+    label.get_style_context().add_class('App-Names')
     label.set_xalign(0)
     hbox.pack_start(label, True, True, 2)
     
