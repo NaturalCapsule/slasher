@@ -110,4 +110,5 @@ def on_key_press(widget, event):
     if key == "Escape":
         # exit(0)
         Gtk.main_quit()
-    return True
+        return True
+    return False
